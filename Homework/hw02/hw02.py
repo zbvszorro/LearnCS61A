@@ -32,6 +32,12 @@ def product(n, term):
     162
     """
     "*** YOUR CODE HERE ***"
+    result = 1
+    for i in range(1, n + 1):
+        result *= term(i)
+
+    return result
+
 
 
 def accumulate(merger, start, n, term):
@@ -60,6 +66,12 @@ def accumulate(merger, start, n, term):
     """
     "*** YOUR CODE HERE ***"
 
+    result = start
+    for i in range(1, n + 1):
+        result = merger(result, term(i))
+
+    return result
+
 
 def summation_using_accumulate(n, term):
     """Returns the sum: term(1) + ... + term(n), using accumulate.
@@ -75,7 +87,8 @@ def summation_using_accumulate(n, term):
     >>> [type(x).__name__ for x in ast.parse(inspect.getsource(summation_using_accumulate)).body[0].body]
     ['Expr', 'Return']
     """
-    "*** YOUR CODE HERE ***"
+    # "*** YOUR CODE HERE ***"
+    return accumulate(add, 0, n, term)
 
 
 def product_using_accumulate(n, term):
@@ -92,8 +105,8 @@ def product_using_accumulate(n, term):
     >>> [type(x).__name__ for x in ast.parse(inspect.getsource(product_using_accumulate)).body[0].body]
     ['Expr', 'Return']
     """
-    "*** YOUR CODE HERE ***"
-
+    # "*** YOUR CODE HERE ***"
+    return accumulate(mul, 1, n, term)
 
 def funception(func1, start):
     """ Takes in a function (function 1) and a start value.
@@ -120,8 +133,26 @@ def funception(func1, start):
     >>> func2_6 = funception(func1, -1)
     >>> func2_6(4)    # Returns None since start < 0
     """
-    "*** YOUR CODE HERE ***"
+    # "*** YOUR CODE HERE ***"
+    def product_new(start, stop, func1):
+        i = start
+        result = 1
+        while i < stop:
+            # print(f'i = {i}; func1(i) = {func1(i)}')
+            result *= func1(i)
+            i += 1
 
+        return result
+
+    def f1(stop):
+        if start < 0:
+            return None
+        if start >= stop:
+            return func1(start)
+
+        return product_new(start, stop, func1)
+
+    return f1
 
 def mul_by_num(num):
     """Returns a function that takes one argument and returns num
@@ -134,7 +165,11 @@ def mul_by_num(num):
     >>> y(-4)
     -8
     """
-    return ______
+
+    return lambda x: x * num
+
+
+
 
 
 def mod_maker():
@@ -148,7 +183,7 @@ def mod_maker():
     >>> mod(8,4) # 8 % 4
     True
     """
-    return ______
+    return lambda x, y: True if x % y == 0 else x % y
 
 
 def add_results(f1, f2):
@@ -171,7 +206,7 @@ def add_results(f1, f2):
     >>> a3(4)
     44
     """
-    return ______
+    return lambda num: f1(num) + f2(num)
 
 
 def lambda_math_syntax_check():

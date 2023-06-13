@@ -1,0 +1,11 @@
+Point breakdown
+    product: 1.0/1
+    accumulate: 1.0/1
+    funception: 1.0/1
+    mul_by_num: 1.0/1
+    mod_maker: 1.0/1
+    add_results: 1.0/1
+    lambda_math_syntax_check: 1.0/1
+
+Score:
+    Total: 7.0
